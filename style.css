@@ -1,0 +1,115 @@
+
+/* Configura a aparência geral da página */
+/* fonte alterada */
+body {
+    font-family: 'Zen Dots', sans-serif;
+    background-color: #2f1b31;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estiliza o quadro principal do sistema */
+.container {
+    background: rgb(240, 240, 233);
+
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    width: 100%;
+    max-width: 360px;
+    box-sizing: border-box;
+}
+
+/* Estiliza o título principal */
+h1 {
+    font-size: 22px;
+    text-align: center;
+    color: #2f1b31;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Organiza os nomes dos campos */
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+}
+
+/* Estiliza os campos de nome e notas */
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    /* Animação suave dos campos */
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+}
+
+/* Efeito de animação ao selecionar um campo */
+input:focus {
+    transform: scale(1.03);
+    border-color: #a855f7;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+    outline: none;
+}
+
+/* Estiliza o botão de calcular a média */
+button {
+    margin-top: 16px;
+    padding: 10px;
+    width: 100%;
+
+    cursor: pointer;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 12px;
+
+    background-color: #4169e1;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+button:hover {
+    background-color: #2547a8;
+    transform: scale(1.03);
+}
+
+/* Área que exibe a média e a situação do aluno */
+#resultado {
+    margin-top: 16px;
+    padding: 10px;
+
+    background-color: #f0f0f0;
+    color: #2f1b31;
+
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+
+    overflow-wrap: anywhere;
+}
+
