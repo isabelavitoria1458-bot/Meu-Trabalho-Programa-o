@@ -1,85 +1,72 @@
+// Função que calcula a média e mostra o resultado
+function calcularMedia() {
 
-// Aguarda o carregamento do HTML
-document.addEventListener("DOMContentLoaded", function () {
+  // Captura os valores digitados
+  let nome = document.getElementById("nome").value.trim();
+  let nota1 = document.getElementById("nota1").value;
+  let nota2 = document.getElementById("nota2").value;
+  let nota3 = document.getElementById("nota3").value;
 
-    const botao = document.getElementById("btn-calcular");
-    const resultado = document.getElementById("resultado");
 
-    function calcularMedia() {
-        const nome = document.getElementById("nome").value.trim();
+// Conferir: algum campo vazio?
 
-        // Lê as quatro notas
-        const camposNotas = [
-            document.getElementById("nota1").value,
-            document.getElementById("nota2").value,
-            document.getElementById("nota3").value,
-            document.getElementById("nota4").value
-        ];
+  if (nome === "" || nota1 === "" || nota2 === "" || nota3 === "") {
+  document.getElementById("resultado").innerText = "Preencha o nome e as três notas!";
+  return;
+  }
 
-        // Lê a média mínima informada pelo usuário
-        const campoMediaExigida =
-            document.getElementById("media-exigida").value;
+// Conferir: o nome tem algum número?
+if (/[0-9]/.test(nome)) {
+  document.getElementById("resultado").innerText = "O nome não pode ter números!";
+  return;
+  }
 
-        // Verifica se os campos foram preenchidos
-        if (
-            nome === "" ||
-            camposNotas.some(nota => nota === "") ||
-            campoMediaExigida === ""
-        ) {
-            resultado.innerText = "Preencha todos os campos!";
-            return;
-        }
+// Agora sim, transformar as notas em número
+nota1 = Number(nota1);
+nota2 = Number(nota2);
+nota3 = Number(nota3);
 
-        // Converte os valores para números
-        const notas = camposNotas.map(Number);
-        const mediaExigida = Number(campoMediaExigida);
-
-        // Valida as quatro notas
-        if (notas.some(nota =>
-            !Number.isFinite(nota) || nota < 0 || nota > 10
-        )) {
-            resultado.innerText =
-                "As notas devem estar entre 0 e 10!";
-            return;
-        }
-
-        // Valida a média mínima exigida
-        if (
-            !Number.isFinite(mediaExigida) ||
-            mediaExigida < 0 ||
-            mediaExigida > 10
-        ) {
-            resultado.innerText =
-                "A média exigida deve estar entre 0 e 10!";
-            return;
-        }
-
-        // Calcula a média das quatro notas
-        const media =
-            notas.reduce((soma, nota) => soma + nota, 0) / 4;
-
-        // Compara a média do aluno com a exigida
-        const aprovado = media >= mediaExigida;
-
-        const situacao = aprovado ? "Aprovado" : "Reprovado";
-
-        // Exibe o resultado
-        resultado.innerText =
-            "Aluno: " + nome +
-            "\nMédia do aluno: " +
-            media.toFixed(2).replace(".", ",") +
-            "\nMédia exigida: " +
-            mediaExigida.toFixed(2).replace(".", ",") +
-            "\nSituação: " + situacao;
+// Conferir: alguma nota fora de 0 a 10?
+if (nota1 < 0 || nota1 > 10 || 
+    nota2 < 0 || nota2 > 10 ||
+    nota3 < 0 || nota3 > 10) {
+    document.getElementById("resultado").innerText = "Escolha um número de 0 a 10!"
+    return;
     }
 
-    // Conecta o botão à função
-    if (botao && resultado) {
-        botao.addEventListener("click", calcularMedia);
-    } else {
-        console.error(
-            "Não foi possível encontrar o botão ou a área de resultado."
-        );
-    }
+  console.log("Nome:", nome);
+  console.log("Nota 1:", nota1);
+  console.log("Nota 2:", nota2);
+  console.log("Nota 3:", nota3);
 
-});
+  // Calcula a média das 3 notas
+  let media = (nota1 + nota2 + nota3) / 3;
+
+  console.log("Média calculada:", media);
+
+  // Define a situação do aluno usando if/else
+  let situacao;
+
+  if (media >= 7) {
+    situacao = "Aprovado";
+  }
+  else if (media >= 5 && media <= 6.9) {
+    situacao = "Recupeção";
+  }
+  else { 
+    situacao = "Reprovado";
+  }
+  console.log("Situação:", situacao);
+
+  // Passo 1: arredonda a média para 1 casa decimal
+  let mediaArredondada = media.toFixed(1);
+
+  // Passo 2: monta o texto que vai aparecer na tela
+  let texto = nome + " — Média: " + mediaArredondada
+    + " (" + situacao + ")";
+
+  // Passo 3: mostra o texto na tela
+  document.getElementById("resultado").innerText = texto;
+}
+// Quando o botão for clicado, chama a função acima
+document.getElementById("btn-calcular").addEventListener("click", calcularMedia);
